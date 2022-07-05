@@ -1,0 +1,11 @@
+br/com/cliente/crud/util/MaskUtil.class
+br/com/cliente/crud/repository/UsuarioRepository.class
+br/com/cliente/crud/ClienteCrudApiApplication.class
+br/com/cliente/crud/model/Endereco.class
+br/com/cliente/crud/model/Email.class
+br/com/cliente/crud/controller/UsuarioController.class
+br/com/cliente/crud/enums/PerfilEnum.class
+br/com/cliente/crud/model/Perfil.class
+br/com/cliente/crud/model/Telefone.class
+br/com/cliente/crud/service/UsuarioService.class
+br/com/cliente/crud/model/Usuario.class
