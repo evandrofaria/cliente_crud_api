@@ -3,7 +3,7 @@ package br.com.cliente.crud.util;
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 
-public class MaskUtil {
+public class Util {
     public static String getCpfWithMask(String nuCpf) {
         try {
             if (nuCpf == null || nuCpf.trim().length() == 0) {
@@ -62,5 +62,13 @@ public class MaskUtil {
                 .replaceAll("\\(", "")
                 .replaceAll("\\)", "")
                 .replaceAll("\\/", "");
+    }
+
+    public static boolean validaCep(String cep) {
+        if (!cep.matches("\\d{8}")) {
+            return false;
+        }
+
+        return true;
     }
 }

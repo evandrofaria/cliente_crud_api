@@ -1,7 +1,7 @@
 package br.com.cliente.crud.model;
 
 
-import br.com.cliente.crud.util.MaskUtil;
+import br.com.cliente.crud.util.Util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -30,6 +30,6 @@ public class Telefone {
     private Usuario usuario;
 
     public String getTelefone() {
-        return MaskUtil.getTelWithMask(this.telefone);
+        return Util.getTelWithMask(this.telefone);
     }
 }

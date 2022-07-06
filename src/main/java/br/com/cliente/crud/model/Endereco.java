@@ -1,7 +1,7 @@
 package br.com.cliente.crud.model;
 
 
-import br.com.cliente.crud.util.MaskUtil;
+import br.com.cliente.crud.util.Util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -63,6 +63,6 @@ public class Endereco {
     }
 
     public String getCep() {
-        return MaskUtil.getCepWithMask(this.cep);
+        return Util.getCepWithMask(this.cep);
     }
 }

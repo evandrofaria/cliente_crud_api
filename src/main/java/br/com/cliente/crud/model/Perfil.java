@@ -12,12 +12,12 @@ public class Perfil {
     @Column(name="id_perfil")
     private Long id;
 
-    @Column(name="ds_perfil")
+    @Column(name="ds_role")
     String perfil;
 
     public Long getId() {
         return id;
     }
 
-    public String getTipo() { return perfil; }
+    public String getRole() { return perfil; }
 }

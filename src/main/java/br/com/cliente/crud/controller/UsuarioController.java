@@ -17,7 +17,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    @GetMapping("/usuario/{id}")
+    @GetMapping("/usuarios/{id}")
     public Optional<Usuario> getUsuario(@PathVariable Long id) {
         return usuarioRepository.findById(id);
     }

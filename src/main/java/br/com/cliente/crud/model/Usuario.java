@@ -1,6 +1,6 @@
 package br.com.cliente.crud.model;
 
-import br.com.cliente.crud.util.MaskUtil;
+import br.com.cliente.crud.util.Util;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.Getter;
@@ -47,6 +47,6 @@ public class Usuario {
     private List<Telefone> telefones = new ArrayList<>();
 
     public String getCpfMasked() {
-        return MaskUtil.getCpfWithMask(this.cpf);
+        return Util.getCpfWithMask(this.cpf);
     }
 }
