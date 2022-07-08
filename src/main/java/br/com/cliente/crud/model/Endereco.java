@@ -15,6 +15,7 @@ import javax.persistence.*;
 public class Endereco {
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_endereco_id_endereco_seq")
     @Column(name = "id_endereco", nullable = false, columnDefinition = "NUMBER(10)")
     private Long id;

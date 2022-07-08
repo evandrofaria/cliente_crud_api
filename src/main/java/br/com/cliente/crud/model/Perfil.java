@@ -1,5 +1,6 @@
 package br.com.cliente.crud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
 public class Perfil {
 
     @Id
+    @JsonIgnore
     @Column(name="id_perfil")
     private Long id;
 
