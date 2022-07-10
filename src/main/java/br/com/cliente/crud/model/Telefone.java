@@ -1,7 +1,7 @@
 package br.com.cliente.crud.model;
 
 
-import br.com.cliente.crud.util.Util;
+import br.com.cliente.crud.util.AbstractUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
@@ -28,8 +28,4 @@ public class Telefone {
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
-
-    public String getTelefone() {
-        return Util.getTelWithMask(this.telefone);
-    }
 }

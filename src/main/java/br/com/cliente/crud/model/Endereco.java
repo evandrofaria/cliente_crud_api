@@ -1,9 +1,7 @@
 package br.com.cliente.crud.model;
 
 
-import br.com.cliente.crud.util.Util;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,14 +13,12 @@ import javax.persistence.*;
 public class Endereco {
 
     @Id
-    @JsonIgnore
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_endereco_id_endereco_seq")
-    @Column(name = "id_endereco", nullable = false, columnDefinition = "NUMBER(10)")
+    @Column(name = "id_endereco")
     private Long id;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "endereco")
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @Column(name = "nu_cep")
@@ -42,28 +38,4 @@ public class Endereco {
 
     @Column(name = "ds_complemento")
     String complemento;
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public String getUf() {
-        return uf;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public String getCep() {
-        return Util.getCepWithMask(this.cep);
-    }
 }

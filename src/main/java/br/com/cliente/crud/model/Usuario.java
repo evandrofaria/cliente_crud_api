@@ -1,7 +1,7 @@
 package br.com.cliente.crud.model;
 
-import br.com.cliente.crud.util.Util;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "tb_usuario")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @SequenceGenerator(name = "tb_usuario_id_usuario_seq", sequenceName = "tb_usuario_id_usuario_seq", allocationSize = 1)
 public class Usuario {
 
@@ -36,17 +37,14 @@ public class Usuario {
     @JoinColumn(name = "id_perfil")
     private Perfil perfil;
 
-    @OneToOne
-    @JoinColumn(name = "id_endereco")
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Email> email = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private List<Email> emails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Telefone> telefones = new ArrayList<>();
 
-    public String getCpfMasked() {
-        return Util.getCpfWithMask(this.cpf);
-    }
 }

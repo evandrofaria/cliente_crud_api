@@ -23,6 +23,4 @@ public class Email {
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
-
-    public String getEmail() { return email; }
 }
