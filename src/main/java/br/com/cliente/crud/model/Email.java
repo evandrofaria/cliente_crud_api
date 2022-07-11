@@ -22,22 +22,13 @@ public class Email implements Serializable {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
-
-    public Email() {
-    }
 
     public interface Existing {
     }
 
     public interface New {
-    }
-
-    public Email(String email, Long id, Long idUsuario) {
-        this.setEmail(email);
-        this.setId(id);
-        this.setIdUsuario(idUsuario);
     }
 
     public Long getId() {
@@ -50,5 +41,10 @@ public class Email implements Serializable {
 
     public void setIdUsuario(Long idUsuario) {
         usuario.setIdUsuario(idUsuario);
+    }
+
+    public void setEmail(String email, Usuario usuario) {
+        this.setEmail(email);
+        setUsuario(usuario);
     }
 }

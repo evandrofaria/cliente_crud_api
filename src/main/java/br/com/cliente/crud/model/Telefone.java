@@ -9,11 +9,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "tb_telefone")
-@SequenceGenerator(name = "tb_email_id_telefone_seq", sequenceName = "tb_email_id_telefone_seq", allocationSize = 1)
+@SequenceGenerator(name = "tb_telefone_id_telefone_seq", sequenceName = "tb_telefone_id_telefone_seq", allocationSize = 1)
 public class Telefone {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_email_id_telefone_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_telefone_id_telefone_seq")
     @Column(name = "id_telefone", updatable = false, nullable = false)
     Long id;
 
@@ -63,5 +63,11 @@ public class Telefone {
 
     public void setTipoTelefone(String tipoTelefone) {
         this.tipoTelefone = tipoTelefone;
+    }
+
+    public void addTelefones(String telefone, String tipoTelefone, Usuario usuario) {
+        this.setTelefone(telefone);
+        this.setTipoTelefone(tipoTelefone);
+        setUsuario(usuario);
     }
 }

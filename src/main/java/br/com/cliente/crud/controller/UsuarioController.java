@@ -30,18 +30,21 @@ public class UsuarioController {
     @Autowired
     private TelefoneRepository telefoneRepository;
 
+    // Buscar todos os usuarios cadastrados
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Usuario> listar() {
 
         return usuarioRepository.findAll();
     }
 
+    // Buscar usuario pelo id
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Usuario getUsuario(@PathVariable Long id) {
 
         return usuarioRepository.getOne(id);
     }
 
+    // Buscar todos os emails
     @GetMapping(path = "/{id}/emails", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Email> getEmails(@PathVariable Long id) {
         Usuario usuario = usuarioRepository.getOne(id);
@@ -49,6 +52,7 @@ public class UsuarioController {
         return emailRepository.findEmailsByUsuario(usuario);
     }
 
+    // Buscar todos os telefones
     @GetMapping(path = "/{id}/telefones", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Telefone> getTelefones(@PathVariable Long id) {
         Usuario usuario = usuarioRepository.getOne(id);
@@ -56,6 +60,7 @@ public class UsuarioController {
         return telefoneRepository.findTelefoneByUsuario(usuario);
     }
 
+    // Editar nome e endereco
     @PutMapping("/{id}/dados-basicos/editar")
     public Usuario atualizarUsuario(@PathVariable Long id,
                                     @RequestBody Usuario usuario) {
@@ -64,6 +69,7 @@ public class UsuarioController {
         return usuarioService.atualizarDadosBasicos(usuario);
     }
 
+    // Editar email
     @PutMapping("/{id}/emails/editar")
     public Email atualizarEmails(@PathVariable Long id,
                                  @Validated(Email.Existing.class)
@@ -80,6 +86,7 @@ public class UsuarioController {
         return emailRepository.save(atualizar);
     }
 
+    // Editar telefone
     @PutMapping("/{id}/telefones/editar")
     public Telefone atualizarTelefones(@PathVariable Long id,
                                        @Validated(Telefone.Existing.class)
@@ -98,5 +105,31 @@ public class UsuarioController {
         }
 
         return telefoneRepository.save(atualizar);
+    }
+
+    // Incluir email
+    @PostMapping("/{id}/emails/incluir")
+    public Email cadastrarEmail(@PathVariable Long id,
+                                @Validated(Email.New.class)
+                                @RequestBody Email insert) {
+
+        Usuario usuario = this.usuarioRepository.getOne(id);
+        Email email = new Email();
+        email.setEmail(insert.getEmail(), usuario);
+
+        return emailRepository.save(email);
+    }
+
+    // Incluir telefone
+    @PostMapping("/{id}/telefones/incluir")
+    public Telefone cadastrarTelefone(@PathVariable Long id,
+                                      @Validated(Telefone.New.class)
+                                      @RequestBody Telefone insert) {
+
+        Usuario usuario = this.usuarioRepository.getOne(id);
+        Telefone telefone = new Telefone();
+        telefone.addTelefones(insert.getTelefone(), insert.getTipoTelefone(), usuario);
+
+        return telefoneRepository.save(telefone);
     }
 }
