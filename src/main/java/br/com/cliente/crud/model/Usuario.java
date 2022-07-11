@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -41,10 +43,14 @@ public class Usuario {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
     private Endereco endereco;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Email> emails = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Telefone> telefones = new ArrayList<>();
 
 }

@@ -1,15 +1,16 @@
 package br.com.cliente.crud.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name = "tb_email")
 @SequenceGenerator(name = "tb_email_id_email_seq", sequenceName = "tb_email_id_email_seq", allocationSize = 1)
-public class Email {
+public class Email implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_email_id_email_seq")
@@ -19,8 +20,35 @@ public class Email {
     @Column(name = "ds_email")
     String email;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    public Email() {
+    }
+
+    public interface Existing {
+    }
+
+    public interface New {
+    }
+
+    public Email(String email, Long id, Long idUsuario) {
+        this.setEmail(email);
+        this.setId(id);
+        this.setIdUsuario(idUsuario);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        usuario.setIdUsuario(idUsuario);
+    }
 }

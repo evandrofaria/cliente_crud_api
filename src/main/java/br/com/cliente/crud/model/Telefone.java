@@ -1,8 +1,7 @@
 package br.com.cliente.crud.model;
 
 
-import br.com.cliente.crud.util.AbstractUtils;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,7 +14,7 @@ public class Telefone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tb_email_id_telefone_seq")
-    @Column(name = "id_telefone")
+    @Column(name = "id_telefone", updatable = false, nullable = false)
     Long id;
 
     @Column(name = "no_telefone")
@@ -24,8 +23,45 @@ public class Telefone {
     @Column(name = "ds_tipo")
     String tipoTelefone;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
+    public Telefone() {
+    }
+
+    public interface Existing {
+    }
+
+    public interface New {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getTipoTelefone() {
+        return tipoTelefone;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        usuario.setIdUsuario(idUsuario);
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setTipoTelefone(String tipoTelefone) {
+        this.tipoTelefone = tipoTelefone;
+    }
 }

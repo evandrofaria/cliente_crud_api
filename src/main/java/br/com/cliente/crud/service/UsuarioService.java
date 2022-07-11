@@ -14,13 +14,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public Usuario getUsuarioById(Long id) {
-        return usuarioRepository.getOne(id);
-    }
-
     @Transactional
-    public Usuario atualizar(Usuario usuario) {
-        Usuario usuarioEdit = this.getUsuarioById(usuario.getIdUsuario());
+    public Usuario atualizarDadosBasicos(Usuario usuario) {
+        Usuario usuarioEdit = usuarioRepository.getOne(usuario.getIdUsuario());
 
         Endereco enderecoEdit = usuario.getEndereco();
         enderecoEdit.setId(usuario.getEndereco().getId());
